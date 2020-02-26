@@ -1,8 +1,0 @@
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\bin\Debug\BingoFB.exe.config
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\obj\Debug\BingoFB.BypassForm.resources
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\obj\Debug\BingoFB.DashboardForm.resources
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\obj\Debug\BingoFB.LoggerForm.resources
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\obj\Debug\BingoFB.MainForm.resources
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\obj\Debug\BingoFB.Resources.resources
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\obj\Debug\BingoFB.RegisterForm.resources
-C:\Users\Dhanny\Documents\Visual Studio 2012\Projects\BingoFB-VB\BingoFB\obj\Debug\BingoFB.Converted.vbproj.GenerateResource.Cache
