@@ -147,58 +147,65 @@ Public Class ManagementForm
 	End Sub
 
 	Private Sub SetupRegisterForm()
-		Me.DisposwRegisterForm()
-		ScenarioForm.Remove("RegisterForm")
-		ScenarioForm.Add("RegisterForm", New RegisterForm(_ownerDlg, Me))
+        Me.DisposeRegisterForm()
+        Dim passwordFrom As DashboardForm = TryCast(_ownerDlg, DashboardForm)
 
-	End Sub
+        Dim RF As New RegisterForm(_ownerDlg, Me)
 
-	Private Sub SetupMainForm()
-		Me.DisposeMainForm()
+        RF.Password = passwordFrom.GetHardwareId()
 
-		Dim mainForm As New MainForm(_ownerDlg, Me)
+        ScenarioForm.Remove("RegisterForm")
+        ScenarioForm.Add("RegisterForm", RF)
 
-		mainForm.SetPassword = DirectCast(_ownerDlg, DashboardForm).GetHardwareId()
-		ScenarioForm.Remove("MainForm")
-		ScenarioForm.Add("MainForm", mainForm)
-	End Sub
+    End Sub
 
-	#End Region
 
-	#Region "DisposeForm"
+    Private Sub SetupMainForm()
+        Me.DisposeMainForm()
 
-	Private Sub DisposwRegisterForm()
-		Dim f As RegisterForm = TryCast(Me.ScenarioForm("RegisterForm"), RegisterForm)
-		If f IsNot Nothing Then
-			f.Dispose()
-		End If
-	End Sub
+        Dim mainForm As New MainForm(_ownerDlg, Me)
 
-	Private Sub DisposeBypassForm()
-		Dim f As BypassForm = TryCast(ScenarioForm("BypassForm"), BypassForm)
-		If f IsNot Nothing Then
-			f.Dispose()
-		End If
-	End Sub
+        mainForm.SetPassword = DirectCast(_ownerDlg, DashboardForm).GetHardwareId()
+        ScenarioForm.Remove("MainForm")
+        ScenarioForm.Add("MainForm", mainForm)
+    End Sub
 
-	Private Sub DisposeMainForm()
-		Dim mf As MainForm = TryCast(ScenarioForm("MainForm"), MainForm)
-		If mf IsNot Nothing Then
-			mf.Dispose()
-		End If
-	End Sub
+#End Region
 
-	Private Sub Cleanup()
-		Dim BF As BypassForm = TryCast(ScenarioForm("BypassForm"), BypassForm)
-		Dim RF As RegisterForm = TryCast(ScenarioForm("RegisterForm"), RegisterForm)
-		If BF IsNot Nothing Then
-			BF.Dispose()
-		End If
-		If RF IsNot Nothing Then
-			RF.Dispose()
-		End If
-		ScenarioForm.Clear()
-	End Sub
-	#End Region
+#Region "DisposeForm"
+
+    Private Sub DisposeRegisterForm()
+        Dim f As RegisterForm = TryCast(Me.ScenarioForm("RegisterForm"), RegisterForm)
+        If f IsNot Nothing Then
+            f.Dispose()
+        End If
+    End Sub
+
+    Private Sub DisposeBypassForm()
+        Dim f As BypassForm = TryCast(ScenarioForm("BypassForm"), BypassForm)
+        If f IsNot Nothing Then
+            f.Dispose()
+        End If
+    End Sub
+
+    Private Sub DisposeMainForm()
+        Dim mf As MainForm = TryCast(ScenarioForm("MainForm"), MainForm)
+        If mf IsNot Nothing Then
+            mf.Dispose()
+        End If
+    End Sub
+
+    Private Sub Cleanup()
+        Dim BF As BypassForm = TryCast(ScenarioForm("BypassForm"), BypassForm)
+        Dim RF As RegisterForm = TryCast(ScenarioForm("RegisterForm"), RegisterForm)
+        If BF IsNot Nothing Then
+            BF.Dispose()
+        End If
+        If RF IsNot Nothing Then
+            RF.Dispose()
+        End If
+        ScenarioForm.Clear()
+    End Sub
+#End Region
 
 End Class

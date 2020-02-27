@@ -14,6 +14,9 @@ Public Enum PHP_MODE
 	LOGOUT = 1
 	PASTEBIN = 2
 	OURCLOUD = 3
+
+    REGISTER
+
 End Enum
 
 Public Structure ParameterUrl
@@ -23,6 +26,7 @@ Public Structure ParameterUrl
 	Public mode As PHP_MODE
 	Public timeout As Integer
 	Public method As Method
+    Public museid As String
 End Structure
 
 Public Structure RESPONSE_FEEDBACK
@@ -84,7 +88,11 @@ Class RequestManager
 		If parameterUrl.mode = PHP_MODE.LOGOUT Then
 			Query = "user=" & parameterUrl.musename
 			buffer = Encoding.ASCII.GetBytes(Query)
-		End If
+        End If
+        If (Me.parameterUrl.mode = PHP_MODE.REGISTER) Then
+            Query = String.Concat(New String() {"user=", Me.parameterUrl.musename, "&id=", Me.parameterUrl.museid, "&password=", Me.parameterUrl.password})
+            buffer = Encoding.ASCII.GetBytes(Query)
+        End If
 
 		networkAccesManager.KeepAlive = Me.KeepAlive
 		networkAccesManager.Timeout = parameterUrl.timeout
@@ -135,13 +143,13 @@ Class RequestManager
 		End Using
 
 
-		If parameterUrl.mode = PHP_MODE.LOGIN OrElse parameterUrl.mode = PHP_MODE.LOGOUT Then
-			responsemanager = New ResponseManager(UTF8)
-				'! todo write etc host bokep
-		ElseIf parameterUrl.mode = PHP_MODE.OURCLOUD Then
-				'! todo response from pastebin
-		Else
-		End If
+        If parameterUrl.mode = PHP_MODE.LOGIN OrElse parameterUrl.mode = PHP_MODE.LOGOUT OrElse parameterUrl.mode = PHP_MODE.REGISTER Then
+            responsemanager = New ResponseManager(UTF8)
+            '! todo write etc host bokep
+        ElseIf parameterUrl.mode = PHP_MODE.OURCLOUD Then
+            '! todo response from pastebin
+        Else
+        End If
 
 	End Sub
 
