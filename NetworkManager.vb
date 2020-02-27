@@ -59,19 +59,14 @@ Class RequestManager
 	Private KeepAlive As Boolean = False
 	Private requestAborted As Boolean = False
 
-	Private Event finished As Connect
-	Private Event readyRead As Connect
-
 	Private responsemanager As ResponseManager
 
 
 	Public Sub New(paramurl As ParameterUrl)
 		parameterUrl = paramurl
-		'! Slot
-		AddHandler Me.finished, New Connect(AddressOf Finished)
-		AddHandler Me.readyRead, New Connect(AddressOf ReadyRead)
 		CreateRequest()
 	End Sub
+
 
 	Private Sub CreateRequest()
 
@@ -100,8 +95,8 @@ Class RequestManager
 		networkAccesManager.GetRequestStream().Close()
 
 		webReply = DirectCast(networkAccesManager.GetResponse(), System.Net.HttpWebResponse)
-		RaiseEvent finished()
-		RaiseEvent readyRead()
+        Me.finished()
+        Me.readyRead()
 
 	End Sub
 

@@ -1,82 +1,83 @@
 Imports System.Collections.Generic
+Imports System.Diagnostics
+Imports System.Reflection
 
 Public Structure RESULT_PROCESS
-	Public code As Integer
-	Public [error] As String
-	Public output As String
+    Public code As Integer
+    Public [error] As String
+    Public output As String
 End Structure
 
 Public Class IProcess
-	Private _exe As String
+    Public Sub New(exe As String)
+        Me._exe = exe
+    End Sub
 
-	Public Sub New(exe As String)
+    Private Function GetDirectory() As String
+        Return Assembly.GetExecutingAssembly().Location.Replace("BingoFB.exe", "")
+    End Function
 
-		_exe = exe
-	End Sub
-	Public Function exec(arg As String) As RESULT_PROCESS
-		Return exec(New String() {arg})
-	End Function
-	Public Overridable Function exec(args As String()) As RESULT_PROCESS
-		Dim Result As New RESULT_PROCESS()
-		Dim startInfo As New System.Diagnostics.ProcessStartInfo()
-		startInfo.CreateNoWindow = True
-		startInfo.UseShellExecute = False
-		startInfo.FileName = _exe
-		startInfo.Arguments = args.ToString()
-		startInfo.RedirectStandardError = True
+    Public Function exec(arg As String) As RESULT_PROCESS
+        Return Me.exec(New String() {arg})
+    End Function
 
-		Using execute As System.Diagnostics.Process = System.Diagnostics.Process.Start(startInfo)
-			Try
-				execute.WaitForExit(3000)
-				Result.code = execute.ExitCode
-				Result.[error] = If(execute.StandardError.ReadToEnd().Length > 0, execute.StandardError.ReadToEnd(), String.Empty)
-				Result.output = If(execute.StandardOutput.ReadToEnd().Length > 0, execute.StandardOutput.ReadToEnd(), String.Empty)
-			Finally
-				execute.Kill()
-				execute.Close()
-			End Try
-			Return Result
-		End Using
-	End Function
+    Public Overridable Function exec(args As String()) As RESULT_PROCESS
+        Dim Result As RESULT_PROCESS = Nothing
+        Using execute As Process = Process.Start(New ProcessStartInfo() With {.CreateNoWindow = True, .UseShellExecute = False, .FileName = String.Join("", New String() {Me.GetDirectory(), Me._exe}), .Arguments = If((args.ToString().Length <> -1), args.ToString(), String.Empty), .RedirectStandardError = True, .RedirectStandardOutput = True})
+            Try
+                execute.Start()
+            Finally
+                execute.WaitForExit(3000)
+                execute.Kill()
+                execute.Close()
+                Result.code = execute.ExitCode
+                Result.[error] = If((execute.StandardError.ReadToEnd().Length > 0), execute.StandardError.ReadToEnd(), String.Empty)
+                Result.output = If((execute.StandardOutput.ReadToEnd().Length > 0), execute.StandardOutput.ReadToEnd(), String.Empty)
+            End Try
+        End Using
+        Return Result
+    End Function
+
+    Private _exe As String
 End Class
 
 Public Class GetHardware
-	Implements IProcess
-	Public Sub New()
-		MyBase.New("HardwareId.exe")
-	End Sub
-	Public Overrides Function exec(args As String()) As RESULT_PROCESS
-		Return MyBase.exec(args)
-	End Function
+    Inherits IProcess
+    Public Sub New()
+        MyBase.New("HardwareId.exe")
+    End Sub
+    Public Overrides Function exec(args As String()) As RESULT_PROCESS
+        Return MyBase.exec(args)
+    End Function
 End Class
 
 Public Class ADBBridge
-	Implements IProcess
-	Public Sub New()
-		MyBase.New("adb.exe")
-	End Sub
-	Public Overrides Function exec(args As String()) As RESULT_PROCESS
-		Return MyBase.exec(args)
-	End Function
+    Inherits IProcess
+    Public Sub New()
+        MyBase.New("adb.exe")
+    End Sub
+    Public Overrides Function exec(args As String()) As RESULT_PROCESS
+        Return MyBase.exec(args)
+    End Function
 End Class
 
 Public Class KILLProcessWindows
-	Implements IProcess
-	Public Sub New()
-		MyBase.New("taskkill.exe")
-	End Sub
-	Public Overrides Function exec(args As String()) As RESULT_PROCESS
-		Return MyBase.exec(args)
-	End Function
+    Inherits IProcess
+    Public Sub New()
+        MyBase.New("taskkill.exe")
+    End Sub
+    Public Overrides Function exec(args As String()) As RESULT_PROCESS
+        Return MyBase.exec(args)
+    End Function
 End Class
 
 Public Class NETShell
-	Implements IProcess
-	Public Sub New()
-		MyBase.New("netsh.exe")
-	End Sub
-	Public Overrides Function exec(args As String()) As RESULT_PROCESS
-		Return MyBase.exec(args)
-	End Function
+    Inherits IProcess
+    Public Sub New()
+        MyBase.New("netsh.exe")
+    End Sub
+    Public Overrides Function exec(args As String()) As RESULT_PROCESS
+        Return MyBase.exec(args)
+    End Function
 End Class
 
