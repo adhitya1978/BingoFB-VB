@@ -28,7 +28,7 @@ Public Partial Class MainForm
 		m_museid = Me.textBoxUser.Text
 		Dim LoginPHP As New ParameterUrl()
 		LoginPHP.musename = m_museid
-		LoginPHP.password = password
+        LoginPHP.password = Me.password
 		LoginPHP.mode = PHP_MODE.LOGIN
 		LoginPHP.timeout = 300000
 		LoginPHP.url = String.Format("{0}{1}", mainUrl, "login.php").Trim()
@@ -46,11 +46,11 @@ Public Partial Class MainForm
 		End Try
 	End Sub
 
-	Public WriteOnly Property SetPassword() As String
-		Set
-			password = value
-		End Set
-	End Property
+    Public WriteOnly Property SetPassword() As String
+        Set(ByVal value As String)
+            password = value
+        End Set
+    End Property
 
 	Public ReadOnly Property MuseId() As String
 		Get

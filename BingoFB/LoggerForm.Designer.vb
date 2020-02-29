@@ -1,3 +1,4 @@
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class LoggerForm
 	''' <summary>
 	''' Required designer variable.
@@ -21,6 +22,7 @@ Partial Class LoggerForm
 	''' Required method for Designer support - do not modify
 	''' the contents of this method with the code editor.
 	''' </summary>
+	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
 		Me.groupBox1 = New System.Windows.Forms.GroupBox()
 		Me.listBox1 = New System.Windows.Forms.ListBox()

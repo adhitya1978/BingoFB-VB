@@ -190,17 +190,17 @@ Class ResponseManager
 	End Sub
 
 	Private Sub Load()
-		Using jsonreader As System.Xml.XmlDictionaryReader = System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader(Me.JSONByte, New System.Xml.XmlDictionaryReaderQuotas())
-			Try
-				If jsonreader Is Nothing Then
-					Throw New Exception(String.Format("JsonUtil.Load(). {0}", "failed to load"))
-				End If
-				ReadyRead(jsonreader)
-			Finally
-				jsonreader.Close()
+        Using jsonreader As System.Xml.XmlDictionaryReader = System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader(Me.JSONByte, New System.Xml.XmlDictionaryReaderQuotas())
+            Try
+                If jsonreader Is Nothing Then
+                    Throw New Exception(String.Format("JsonUtil.Load(). {0}", "failed to load"))
+                End If
+                ReadyRead(jsonreader)
+            Finally
+                jsonreader.Close()
 
-			End Try
-		End Using
+            End Try
+        End Using
 	End Sub
 
 	'! noted the response must be jsonformat {"key":"value"}

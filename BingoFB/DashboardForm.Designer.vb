@@ -1,45 +1,42 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class DashboardForm
-	''' <summary>
-	''' Required designer variable.
-	''' </summary>
-	Private components As System.ComponentModel.IContainer = Nothing
+    Inherits System.Windows.Forms.Form
 
-	''' <summary>
-	''' Clean up any resources being used.
-	''' </summary>
-	''' <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-	Protected Overrides Sub Dispose(disposing As Boolean)
-		If disposing AndAlso (components IsNot Nothing) Then
-			components.Dispose()
-		End If
-		MyBase.Dispose(disposing)
-	End Sub
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
 
-	#Region "Windows Form Designer generated code"
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
 
-	''' <summary>
-	''' Required method for Designer support - do not modify
-	''' the contents of this method with the code editor.
-	''' </summary>
-	Private Sub InitializeComponent()
-		Dim resources As New System.ComponentModel.ComponentResourceManager(GetType(DashboardForm))
-		Me.SuspendLayout()
-		' 
-		' DashboardForm
-		' 
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6F, 13F)
-		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(516, 352)
-		Me.Icon = DirectCast(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-		Me.IsMdiContainer = True
-		Me.Name = "DashboardForm"
-		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "     BingoFb - V1.0"
-		Me.ResumeLayout(False)
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DashboardForm))
+        Me.SuspendLayout()
+        '
+        'DashboardForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(754, 372)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IsMdiContainer = True
+        Me.Name = "DashboardForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "     BingoFb - V1.0"
+        Me.ResumeLayout(False)
 
-	End Sub
-
-	#End Region
+    End Sub
 
 End Class
-

@@ -1,202 +1,130 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class RegisterForm
-    ''' <summary>
-    ''' Required designer variable.
-    ''' </summary>
-    Private components As System.ComponentModel.IContainer = Nothing
+    Inherits System.Windows.Forms.Form
 
-    ''' <summary>
-    ''' Clean up any resources being used.
-    ''' </summary>
-    ''' <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    Protected Overrides Sub Dispose(disposing As Boolean)
-        If disposing AndAlso (components IsNot Nothing) Then
-            components.Dispose()
-        End If
-        MyBase.Dispose(disposing)
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
     End Sub
 
-#Region "Windows Form Designer generated code"
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
 
-    ''' <summary>
-    ''' Required method for Designer support - do not modify
-    ''' the contents of this method with the code editor.
-    ''' </summary>
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.buttonCancel = New System.Windows.Forms.Button()
-        Me.buttonAccept = New System.Windows.Forms.Button()
-        Me.groupBox1 = New System.Windows.Forms.GroupBox()
-        Me.splitContainer2 = New System.Windows.Forms.SplitContainer()
-        Me.labelMuseId = New System.Windows.Forms.Label()
-        Me.textBoxMuseId = New System.Windows.Forms.TextBox()
-        Me.splitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.labelUser = New System.Windows.Forms.Label()
-        Me.textBoxMuseName = New System.Windows.Forms.TextBox()
-        Me.splitter1 = New System.Windows.Forms.Splitter()
-        Me.groupBox1.SuspendLayout()
-        CType(Me.splitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splitContainer2.Panel1.SuspendLayout()
-        Me.splitContainer2.Panel2.SuspendLayout()
-        Me.splitContainer2.SuspendLayout()
-        CType(Me.splitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splitContainer1.Panel1.SuspendLayout()
-        Me.splitContainer1.Panel2.SuspendLayout()
-        Me.splitContainer1.SuspendLayout()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TextBoxMuseName = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TextBoxMuseId = New System.Windows.Forms.TextBox()
+        Me.Splitter1 = New System.Windows.Forms.Splitter()
+        Me.ButtonAccept = New System.Windows.Forms.Button()
+        Me.ButtonCancel = New System.Windows.Forms.Button()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'buttonCancel
+        'GroupBox1
         '
-        Me.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.buttonCancel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.buttonCancel.Location = New System.Drawing.Point(0, 235)
-        Me.buttonCancel.Name = "buttonCancel"
-        Me.buttonCancel.Size = New System.Drawing.Size(383, 56)
-        Me.buttonCancel.TabIndex = 0
-        Me.buttonCancel.Text = "Cancel"
-        Me.buttonCancel.UseVisualStyleBackColor = True
-        AddHandler Me.buttonCancel.Click, New System.EventHandler(AddressOf Me.buttonCancel_Click)
+        Me.GroupBox1.Controls.Add(Me.TextBoxMuseName)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(292, 50)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Muse name:"
         '
-        'buttonAccept
+        'TextBoxMuseName
         '
-        Me.buttonAccept.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.buttonAccept.Location = New System.Drawing.Point(0, 182)
-        Me.buttonAccept.Name = "buttonAccept"
-        Me.buttonAccept.Size = New System.Drawing.Size(383, 53)
-        Me.buttonAccept.TabIndex = 1
-        Me.buttonAccept.Text = "Accept"
-        Me.buttonAccept.UseVisualStyleBackColor = True
-        AddHandler Me.buttonAccept.Click, New System.EventHandler(AddressOf Me.buttonAccept_Click)
+        Me.TextBoxMuseName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBoxMuseName.Location = New System.Drawing.Point(3, 16)
+        Me.TextBoxMuseName.Name = "TextBoxMuseName"
+        Me.TextBoxMuseName.Size = New System.Drawing.Size(286, 20)
+        Me.TextBoxMuseName.TabIndex = 1
         '
-        'groupBox1
+        'GroupBox2
         '
-        Me.groupBox1.Controls.Add(Me.splitContainer2)
-        Me.groupBox1.Controls.Add(Me.splitContainer1)
-        Me.groupBox1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.groupBox1.Location = New System.Drawing.Point(0, 0)
-        Me.groupBox1.Name = "groupBox1"
-        Me.groupBox1.Size = New System.Drawing.Size(383, 90)
-        Me.groupBox1.TabIndex = 2
-        Me.groupBox1.TabStop = False
-        Me.groupBox1.Text = "User Registration"
+        Me.GroupBox2.Controls.Add(Me.TextBoxMuseId)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 50)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(292, 50)
+        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Muse id:"
         '
-        'splitContainer2
+        'TextBoxMuseId
         '
-        Me.splitContainer2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.splitContainer2.Location = New System.Drawing.Point(3, 46)
-        Me.splitContainer2.Name = "splitContainer2"
+        Me.TextBoxMuseId.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBoxMuseId.Location = New System.Drawing.Point(3, 16)
+        Me.TextBoxMuseId.Name = "TextBoxMuseId"
+        Me.TextBoxMuseId.Size = New System.Drawing.Size(286, 20)
+        Me.TextBoxMuseId.TabIndex = 1
         '
-        'splitContainer2.Panel1
+        'Splitter1
         '
-        Me.splitContainer2.Panel1.Controls.Add(Me.labelMuseId)
+        Me.Splitter1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Splitter1.Location = New System.Drawing.Point(0, 100)
+        Me.Splitter1.Name = "Splitter1"
+        Me.Splitter1.Size = New System.Drawing.Size(292, 11)
+        Me.Splitter1.TabIndex = 2
+        Me.Splitter1.TabStop = False
         '
-        'splitContainer2.Panel2
+        'ButtonAccept
         '
-        Me.splitContainer2.Panel2.Controls.Add(Me.textBoxMuseId)
-        Me.splitContainer2.Size = New System.Drawing.Size(377, 27)
-        Me.splitContainer2.SplitterDistance = 60
-        Me.splitContainer2.TabIndex = 5
+        Me.ButtonAccept.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ButtonAccept.Location = New System.Drawing.Point(0, 111)
+        Me.ButtonAccept.Name = "ButtonAccept"
+        Me.ButtonAccept.Size = New System.Drawing.Size(292, 49)
+        Me.ButtonAccept.TabIndex = 3
+        Me.ButtonAccept.Text = "Accept"
+        Me.ButtonAccept.UseVisualStyleBackColor = True
         '
-        'labelMuseId
+        'ButtonCancel
         '
-        Me.labelMuseId.AutoSize = True
-        Me.labelMuseId.Location = New System.Drawing.Point(6, 7)
-        Me.labelMuseId.Name = "labelMuseId"
-        Me.labelMuseId.Size = New System.Drawing.Size(45, 13)
-        Me.labelMuseId.TabIndex = 2
-        Me.labelMuseId.Text = "MuseId:"
+        Me.ButtonCancel.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ButtonCancel.Location = New System.Drawing.Point(0, 160)
+        Me.ButtonCancel.Name = "ButtonCancel"
+        Me.ButtonCancel.Size = New System.Drawing.Size(292, 55)
+        Me.ButtonCancel.TabIndex = 4
+        Me.ButtonCancel.Text = "Cancel"
+        Me.ButtonCancel.UseVisualStyleBackColor = True
         '
-        'textBoxMuseId
+        'Form1
         '
-        Me.textBoxMuseId.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.textBoxMuseId.Location = New System.Drawing.Point(0, 0)
-        Me.textBoxMuseId.Name = "textBoxMuseId"
-        Me.textBoxMuseId.Size = New System.Drawing.Size(313, 20)
-        Me.textBoxMuseId.TabIndex = 3
-        '
-        'splitContainer1
-        '
-        Me.splitContainer1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.splitContainer1.Location = New System.Drawing.Point(3, 16)
-        Me.splitContainer1.Name = "splitContainer1"
-        '
-        'splitContainer1.Panel1
-        '
-        Me.splitContainer1.Panel1.Controls.Add(Me.labelUser)
-        '
-        'splitContainer1.Panel2
-        '
-        Me.splitContainer1.Panel2.Controls.Add(Me.textBoxMuseName)
-        Me.splitContainer1.Size = New System.Drawing.Size(377, 30)
-        Me.splitContainer1.SplitterDistance = 60
-        Me.splitContainer1.TabIndex = 4
-        '
-        'labelUser
-        '
-        Me.labelUser.AutoSize = True
-        Me.labelUser.Location = New System.Drawing.Point(9, 3)
-        Me.labelUser.Name = "labelUser"
-        Me.labelUser.Size = New System.Drawing.Size(32, 13)
-        Me.labelUser.TabIndex = 1
-        Me.labelUser.Text = "User:"
-        '
-        'textBoxMuseName
-        '
-        Me.textBoxMuseName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.textBoxMuseName.Location = New System.Drawing.Point(0, 0)
-        Me.textBoxMuseName.Name = "textBoxMuseName"
-        Me.textBoxMuseName.Size = New System.Drawing.Size(313, 20)
-        Me.textBoxMuseName.TabIndex = 0
-        '
-        'splitter1
-        '
-        Me.splitter1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.splitter1.Location = New System.Drawing.Point(0, 90)
-        Me.splitter1.Name = "splitter1"
-        Me.splitter1.Size = New System.Drawing.Size(383, 47)
-        Me.splitter1.TabIndex = 3
-        Me.splitter1.TabStop = False
-        '
-        'RegisterForm
-        '
-        Me.AcceptButton = Me.buttonAccept
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.buttonCancel
-        Me.ClientSize = New System.Drawing.Size(383, 291)
-        Me.Controls.Add(Me.splitter1)
-        Me.Controls.Add(Me.buttonAccept)
-        Me.Controls.Add(Me.buttonCancel)
-        Me.Controls.Add(Me.groupBox1)
+        Me.ClientSize = New System.Drawing.Size(292, 224)
+        Me.Controls.Add(Me.ButtonCancel)
+        Me.Controls.Add(Me.ButtonAccept)
+        Me.Controls.Add(Me.Splitter1)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "RegisterForm"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "RegisterForm"
-        Me.groupBox1.ResumeLayout(False)
-        Me.splitContainer2.Panel1.ResumeLayout(False)
-        Me.splitContainer2.Panel1.PerformLayout()
-        Me.splitContainer2.Panel2.ResumeLayout(False)
-        Me.splitContainer2.Panel2.PerformLayout()
-        CType(Me.splitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splitContainer2.ResumeLayout(False)
-        Me.splitContainer1.Panel1.ResumeLayout(False)
-        Me.splitContainer1.Panel1.PerformLayout()
-        Me.splitContainer1.Panel2.ResumeLayout(False)
-        Me.splitContainer1.Panel2.PerformLayout()
-        CType(Me.splitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splitContainer1.ResumeLayout(False)
+        Me.Name = "Form1"
+        Me.Text = "Form1"
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-
-#End Region
-
-    Private buttonCancel As System.Windows.Forms.Button
-    Private buttonAccept As System.Windows.Forms.Button
-    Private groupBox1 As System.Windows.Forms.GroupBox
-    Private labelUser As System.Windows.Forms.Label
-    Private textBoxMuseName As System.Windows.Forms.TextBox
-    Private labelMuseId As System.Windows.Forms.Label
-    Private textBoxMuseId As System.Windows.Forms.TextBox
-    Private splitContainer2 As System.Windows.Forms.SplitContainer
-    Private splitContainer1 As System.Windows.Forms.SplitContainer
-    Private splitter1 As System.Windows.Forms.Splitter
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents TextBoxMuseName As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents TextBoxMuseId As System.Windows.Forms.TextBox
+    Friend WithEvents Splitter1 As System.Windows.Forms.Splitter
+    Friend WithEvents ButtonAccept As System.Windows.Forms.Button
+    Friend WithEvents ButtonCancel As System.Windows.Forms.Button
 End Class
