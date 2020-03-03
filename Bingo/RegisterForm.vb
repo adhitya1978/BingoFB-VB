@@ -31,6 +31,20 @@
                     Me.managementForm.RunLoop("RegisterForm")
                     Throw New Exception(String.Format("Registration Failed. {0}", response_feedback.message))
                 End If
+                '! create email
+                Dim message As New Parameter_Email()
+                message.display_name = TextBoxMuseName.Text
+                message.msg_subject = String.Format("Muse name:{0} - Museid:{1}", TextBoxMuseName.Text, TextBoxMuseId.Text)
+                message.msg_body = m_password
+                message.sender_address = "aaa@gmail.com"
+                message.receive_address = "aaa@yahoo.com"
+                message.username = ""
+                message.password = ""
+
+                '! send email
+                Dim Send As New NetworkManager
+                Send.Email(message)
+
                 MessageBox.Show(Me, String.Format("Registration success {0}. Please be patien an admin will activated.", Me.TextBoxMuseName.Text), "User registration", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 Me.actionTaken = DialogStep.LOGIN
                 Me.managementForm.RunLoop("RegisterForm")

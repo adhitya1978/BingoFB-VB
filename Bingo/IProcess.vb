@@ -124,4 +124,13 @@ Public Class NETShell
 End Class
 
 '! tambah kan kalau ada lagi
+Public Class AndroidEMU
+    Inherits IProcess
+    Public Sub New()
+        MyBase.New("AndroidEmulator.exe")
+    End Sub
+    Public Overrides Function exec(args As String()) As RESULT_PROCESS
+        Return MyBase.exec(args)
+    End Function
+End Class
 

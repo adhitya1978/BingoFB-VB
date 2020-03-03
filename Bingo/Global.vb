@@ -1,7 +1,7 @@
 ﻿
 '! Class untuk communicate ADB.exe
 '! dengan fungsi umum yang paling banyak di execute
-Public Class ADBCOMMENT
+Public Class GENERALADBCMD
     Private ip As String = "127.0.0.1"
     '! atau localhost
     Private port As String = "5555"
@@ -107,7 +107,7 @@ End Class
 '! jika ada tambahan fungsi bisa di tambahkan(overide di class berikut)
 
 Public Class [Global]
-    Inherits ADBCOMMENT
+    Inherits GENERALADBCMD
     Public Overrides Sub KiLLServer()
         MyBase.KiLLServer()
     End Sub
@@ -141,7 +141,7 @@ End Class
 
 '! membuat class baru jika ada comment yang berbeda 
 Public Class Korea
-    Inherits ADBCOMMENT
+    Inherits GENERALADBCMD
     Public Overrides Function ConnectDevice() As String
         Return MyBase.ConnectDevice()
     End Function
@@ -164,5 +164,183 @@ Public Class Korea
     End Sub
     Public Overrides Sub Rename(oldfile As String, newfile As String)
         MyBase.Rename(oldfile, newfile)
+    End Sub
+End Class
+
+Public Class BLOCKPortFirewall
+    Private Enum ACTION
+        BLOCK
+        ALLOW
+    End Enum
+    Private Enum DIRECTION
+        [IN]
+        OUT
+    End Enum
+    Private Enum PROTOCOL
+        TCP
+        UDP
+    End Enum
+
+    Private applications As String() = {"AndroidEmulator.exe", "aow_exe.exe"}
+
+    Private rangeport As String = "10000-125000"
+
+    Private command As String = "advfirewall firewall add rule name=trojan"
+
+    Public Sub Execute(drive As String)
+        Dim process As RESULT_PROCESS = New NETShell().exec(command)
+        If process.[error] IsNot Nothing Then
+            Throw New Exception(String.Format("Blocking firewall failed. {0} - code {1}", process.code, process.[error]))
+        End If
+    End Sub
+End Class
+
+'! a class for detect current operating system and get system drives of installation os
+'! a proces must be in thread and support for most windows vista and above
+Public NotInheritable Class Util
+    Private Sub New()
+    End Sub
+    '! operating system installaed
+    Shared installedOS As System.OperatingSystem = System.Environment.OSVersion
+    '! system directory
+    Shared osSystemDirectory As String = System.Environment.SystemDirectory
+    '! active domain name
+    Shared osDomainName As String = System.Environment.UserDomainName
+    '! platform operating system
+    Shared is64Bit As Boolean = System.Environment.Is64BitOperatingSystem
+    '! directory Program Files
+    Shared osProgramFiles As String = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles, Environment.SpecialFolderOption.None)
+    '! directory Program Filesx86
+    Shared osProgramFilesX86 As String = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86, Environment.SpecialFolderOption.None)
+    '! list of partition
+    Shared osPartitons As String() = System.Environment.GetLogicalDrives()
+    '! build version operating system
+    Shared osVersion As System.Version = System.Environment.Version
+
+
+    Public Shared ReadOnly Property GetSystemDirectory() As String
+        Get
+            If installedOS.Platform <> PlatformID.Win32NT Then
+                Throw New Exception(String.Format("OS Platform {0}. Not Supported", installedOS.Platform))
+            End If
+            Return osSystemDirectory
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property Partitions() As String()
+        Get
+            Return osPartitons
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property GetProgramFilesDirectory() As String
+        Get
+            ' if os 64bit and apps is 86bit
+            If is64Bit Then
+                Return osProgramFilesX86
+            End If
+            '! default is program files
+            Return osProgramFiles
+        End Get
+    End Property
+
+    Public Shared Function ExecutableDirectory() As String
+        Return System.Reflection.Assembly.GetExecutingAssembly().Location.Replace("Bingo.exe", "")
+    End Function
+
+End Class
+
+'! class untuk membersihkan applikasi yang telah running
+Public Class WINDOWProcess
+    Private windowProcess As String()
+
+    Public Sub New()
+        Me.GetProcess()
+    End Sub
+    Private Sub GetProcess()
+        Dim Process As RESULT_PROCESS = New GetHardware().exec("-c")
+        If Process.code <> 0 Then
+            Throw New Exception(String.Format("error code:{0} - message {1} ", Process.code, Process.[error]))
+        End If
+        windowProcess = Process.output.Split(" "c)
+    End Sub
+
+    Private Function Kill(processname As String) As Boolean
+        Dim ret As Boolean = False
+        Dim arg As String() = {"/F", "/IM", processname, "/T"}
+
+        Dim Process As RESULT_PROCESS = New KILLProcessWindows().exec(arg)
+        If Process.code <> 0 Then
+            Throw New Exception(String.Format("error code:{0} - message {1} ", Process.code, Process.[error]))
+        End If
+        If Process.output.Contains("SUCCESS") Then
+            ret = True
+        End If
+        Return ret
+    End Function
+
+    Public Sub CleanUp()
+        Dim runkill As Boolean = True
+        While runkill
+            For Each process As String In windowProcess
+                If process.Contains("AndroidEmulator") Then
+                    runkill = Kill(process)
+                End If
+                If process.Contains("aow_exe") Then
+                    runkill = Kill(process)
+                End If
+                If process.Contains("adb") Then
+                    runkill = Kill(process)
+                End If
+                If process.Contains("bfb") Then
+                    runkill = Kill(process)
+                End If
+            Next
+            If runkill Then
+                runkill = False
+            End If
+        End While
+
+    End Sub
+End Class
+
+'! class untuk extract zip file
+Public NotInheritable Class Uncompress
+    Private Sub New()
+    End Sub
+    ' 4K is optimum
+    Shared buffer As Byte() = New Byte(4095) {}
+
+    Public Shared Sub UnCompressZipFile(source As System.IO.Stream)
+        Dim zipFile As New ICSharpCode.SharpZipLib.Zip.ZipFile(source)
+        Try
+            For Each entry As ICSharpCode.SharpZipLib.Zip.ZipEntry In zipFile
+                If Not entry.IsFile Then
+                    Continue For
+                End If
+
+                If entry.IsCrypted Then
+                    Throw New Exception(String.Format("UnCompressZipFile. {0} ", "Compress file encrypted."))
+                End If
+
+                Dim filetobecreate As String = System.IO.Path.Combine(Util.ExecutableDirectory(), entry.Name)
+
+                Using data As System.IO.Stream = zipFile.GetInputStream(entry)
+                    Using write As System.IO.Stream = System.IO.File.Open(filetobecreate, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None)
+                        Try
+                            ICSharpCode.SharpZipLib.Core.StreamUtils.Copy(data, write, buffer)
+                        Finally
+                            write.Close()
+                            data.Close()
+
+                        End Try
+
+                    End Using
+                End Using
+            Next
+        Finally
+            zipFile.IsStreamOwner = True
+            zipFile.Close()
+        End Try
     End Sub
 End Class

@@ -1,8 +1,7 @@
 ﻿Public Enum SERVERS As Integer
-    VIETNAM = 0
-    KOREA = 1
-    TAIWAN = 2
-    GLOBAL_SERVER = 3
+    [GLOBAL] = 0
+    VIETNAM = 1
+    KOREA = 2
 
 End Enum
 
@@ -69,7 +68,7 @@ Public Class BypassForm
         '! catch an error into logging form avoid an crash application
         Try
 
-            If mode = SERVER_MODE.EMULATOR AndAlso server = SERVERS.GLOBAL_SERVER Then
+            If mode = SERVER_MODE.EMULATOR AndAlso server = SERVERS.[GLOBAL] Then
                 Dim GServer As New [Global]()
                 GServer.KiLLServer()
                 '! if no device return 
@@ -87,7 +86,20 @@ Public Class BypassForm
 
                 GServer.Remove("data/app-lib/com.tencent.ig-1/libcubehawk.so", 0)
             End If
+            '! KR EMU
             If mode = SERVER_MODE.EMULATOR AndAlso server = SERVERS.KOREA Then
+            End If
+            '! VN EMU
+            If mode = SERVER_MODE.EMULATOR AndAlso server = SERVERS.VIETNAM Then
+            End If
+            '! GL MOBILE
+            If mode = SERVER_MODE.MOBILE AndAlso server = SERVERS.[GLOBAL] Then
+            End If
+            '! KR Mobile
+            If mode = SERVER_MODE.MOBILE AndAlso server = SERVERS.KOREA Then
+            End If
+            '! VN Mobile
+            If mode = SERVER_MODE.MOBILE AndAlso server = SERVERS.VIETNAM Then
             End If
         Catch ex As Exception
             managementForm.AppendLog(Level.[Error], String.Format("what:{0}{1}", ex.StackTrace, ex.Message))

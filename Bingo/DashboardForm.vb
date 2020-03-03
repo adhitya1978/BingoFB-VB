@@ -25,7 +25,7 @@ Public Class DashboardForm
 
     Private Sub GetHardwareId()
 		Try
-            Dim Process As RESULT_PROCESS = New GetHardware().exec("")
+            Dim Process As RESULT_PROCESS = New GetHardware().exec("-u")
             If Process.code <> 0 Then
                 Throw New Exception(Process.[Error])
             End If
