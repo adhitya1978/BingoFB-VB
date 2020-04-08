@@ -1,4 +1,4 @@
-# BingoFB-VB
+# BingoFB-VB --- PROJECT NOT MAINTAIN ANYMORE
 
  ![Screenshoot](https://github.com/adhitya1978/BingoFB-VB/blob/master/Snapshhot/login.png)
  
